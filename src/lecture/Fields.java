@@ -24,5 +24,17 @@ public class Fields {
                 System.out.println("Get & Set field from reflection.");
             }
         }
+        try {
+            Field privateField = myObject.getClass().getDeclaredField("description");
+            privateField.setAccessible(true);
+            try {
+                String fieldValue = (String) privateField.get(myObject);
+                System.out.println("Description is "+fieldValue+".");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
     }
 }
