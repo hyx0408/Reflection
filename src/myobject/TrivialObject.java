@@ -5,6 +5,7 @@ package myobject;
  */
 public class TrivialObject extends TrivialSuperClass implements TrivialInterface {
     private String description = null;
+    public String word = "love";
 
     public TrivialObject(String description) {
         this.description = description;
