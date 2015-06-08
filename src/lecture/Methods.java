@@ -3,6 +3,7 @@ package lecture;
 import myobject.TrivialObject;
 
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
@@ -18,6 +19,21 @@ public class Methods {
             System.out.println("Return type is "+returnClass+".");
             System.out.println("Sum of 1-5 is "+method.invoke(myObject,numbers)+".");
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Method privateMethod = myObject.getClass().getDeclaredMethod("doubleNumber",int.class);
+            privateMethod.setAccessible(true);
+            int a = 2;
+            try {
+                a = (int) privateMethod.invoke(myObject,a);
+                System.out.println("Double of 2 is "+a+".");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
     }
